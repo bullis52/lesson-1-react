@@ -1,6 +1,12 @@
-.simpsons{
+
+.wrap{
     display: flex;
+    flex-wrap: wrap;
 }
-.simpsons div{
-    width: 20%;
+.users{
+    width: 14.5%;
+    background-color: fuchsia;
+    margin: 20px;
+    padding: 20px;
+    color: #fff;
 }
