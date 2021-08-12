@@ -1,7 +1,11 @@
+
 export  function Comment({item}){
     return(
         <div>
-            <h2>{item.postId} - {item.id} {item.name}</h2>
+
+                <p>
+                    {item.name}
+                </p>
         </div>
     )
 }

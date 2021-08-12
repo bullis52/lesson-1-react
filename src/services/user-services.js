@@ -1,9 +1,23 @@
-function getUsers(){
-    return fetch(`https://jsonplaceholder.typicode.com/users`)
-        .then(value => value.json())
+import axios from 'axios'
+
+let config = {
+    baseURL: 'https://jsonplaceholder.typicode.com/'
+};
+let axiosInstance = axios.create(config)
+
+const getUsers = () => {
+    return axiosInstance.get('users')
 }
-function getUser(id){
-    return fetch('https://jsonplaceholder.typicode.com/users'+id)
-        .then(value => value.json())
+const getUser  = (id) => {
+  return axiosInstance.get(`/users${id}`)
 }
-export {getUsers,getUser}
+//todo heandle request
+
+
+const getPostOfUser = (userId) => {
+    return axiosInstance.get(`/users/${userId}/posts`)
+}
+const getComentOfPost = (postId) => {
+    return axiosInstance.get(`/posts/${postId}/comments`)
+}
+export {getUsers,getUser,getPostOfUser,getComentOfPost}

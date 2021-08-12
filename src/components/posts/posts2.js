@@ -1,7 +1,22 @@
+import {useState,useEffect} from "react";
+import {getCommentsOfPost} from "../../services/post-sevices";
+import {Comments} from "../comments/comments";
+import {getComentOfPost} from "../../services/user-services";
+
 export  function Post({item}){
+    let [comments,setComments] = useState([])
+    useEffect(()=>{
+        getComentOfPost(item.id).then(({data}) => setComments([...data]))
+    },[item.id])
+
+
+
     return(
         <div>
-            <h2>{item.userId} - {item.id} {item.title}</h2>
+            <ul>
+                <li>{item.title}</li>
+            </ul>
+            <Comments items = {comments}/>
         </div>
     )
 }
