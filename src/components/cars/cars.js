@@ -1,5 +1,6 @@
-import {createRef, useState} from "react";
-import {saveCars} from "../../services/fetch";
+import {createRef, useEffect, useState} from "react";
+import {getCars, saveCars} from "../../services/fetch";
+import {Cars2} from "./cars2";
 
 export function Cars (){
     let [id,SetId] = useState('id')
@@ -10,7 +11,6 @@ export function Cars (){
     let carForSave = {}
     const onSubmitForm = (e)=>{
         e.preventDefault()
-        console.log(carForSave)
         let tempCar ={id,model,price,year}
         SetModel({...tempCar})
         saveCars(tempCar)
@@ -36,6 +36,13 @@ export function Cars (){
         setYear(year)
         carForSave.year = year
     }
+        let [cars,setCars] = useState([])
+        useEffect(()=>{
+            getCars().then(value => setCars([...value]))
+        },[])
+    let [info, setInfo] = useState('hide')
+
+
     return(
         <div>
             <form onSubmit={onSubmitForm}>
@@ -43,9 +50,20 @@ export function Cars (){
                 <input type="text" model={'model'} value = {model} onInput={onInputChangeModel}/>
                 <input type="text" price={'price'} value={price} onInput={onInputChangePrice}/>
                 <input type="text" year={'year'} value={year} onInput={onInputChangeYear}/>
-                <input type="submit" value={'save'}/>
+                <button onClick={()=>{
+                    if (info === 'hide') {
+                        setInfo('show')
+                    }}}>new car</button>
             </form>
-            <div>{JSON.stringify(car)}</div>
+            <div>
+                <h3><b><i>this car been added to the car list:</i></b></h3>
+                <p ><b><i>model: </i></b>{car.model}<b><i>; price: </i></b>{car.price}<b><i>; year: </i></b>{car.year}</p>
+                {
+                    cars.map(value => <Cars2 item={value} key={value.id}/>)
+                }
+            </div>
         </div>
     )
 }
+
+
