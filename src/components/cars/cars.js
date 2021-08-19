@@ -58,9 +58,17 @@ export function Cars (){
             <div>
                 <h3><b><i>this car been added to the car list:</i></b></h3>
                 <p ><b><i>model: </i></b>{car.model}<b><i>; price: </i></b>{car.price}<b><i>; year: </i></b>{car.year}</p>
-                {
-                    cars.map(value => <Cars2 item={value} key={value.id}/>)
-                }
+                <div>
+                    <button onClick={()=>{
+                            cars.sort(function (a,b){
+                              return a.model.length-b.model.length
+                            })
+                        let item = cars
+                    }}>sort</button>
+                    {
+                        item.map(value => <Cars2 item={value} key={value.id}/>)
+                    }
+                </div>
             </div>
         </div>
     )

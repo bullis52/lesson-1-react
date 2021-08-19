@@ -20,6 +20,7 @@ export function Cars2({item}){
             <div>
                 {editCar1}
             </div>
+
         </div>
     )
 }
