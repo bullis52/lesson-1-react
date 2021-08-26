@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import {useReducer} from "react";
+const reducer = (state = {a:0,b:0},action)=>{
+    if (action.obj ==='1'&& action.diya === '+'){
+      return {...state, a:state.a+10}
+    }
+    if (action.obj ==='1'&& action.diya === '-'){
+      return {...state, a:state.a-2}
+    }
+
+}
 function App() {
+  let [state,dispatch] = useReducer(reducer,{a:0,b:0})
+  let {a,b} = state;
+  console.log(state)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <h1>state1-{a}</h1>
+      <button onClick={() => dispatch({obj:'1',diya:"+"})}>increment</button>
+      <button onClick={()=> dispatch({obj:'1',diya:"-"})}>decrement</button>
     </div>
   );
 }
